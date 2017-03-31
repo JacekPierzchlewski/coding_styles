@@ -1,0 +1,219 @@
+
+================================================================================
+
+Proposed C / C++ coding style.
+
+Version 1.0  (25 Feb 2017)
+
+(c) Jacek Pierzchlewski, 2017  jacek@pierzchlewski.com, pierzchlewski.com
+    license: BSD-2-Clause
+
+================================================================================
+
+I. VARIABLES.
+
+    A.  Names.
+        1. Variable names are in lowerCamelCase.
+
+        2. Constant variables are in UPPERCASE or UPPER_CASE_WITH_UNDERSCORE,
+           except prefix type specification (from Hungarian notation).
+           However, constant variables are allowed not to follow
+           Hungarian notation.
+           example:
+            dPI = 3.14;   // This is ok
+            PI = 3.14;    // This is also ok
+            iDISTANCE_FROM_PERTH_TO_PERTH = 14706;  // This is ok
+            DISTANCE_FROM_PERTH_TO_PERTH = 14706;   // This is also ok
+
+        3. If a unit is added to a variable name, it is added after
+           an underscore.
+           example:
+             tAvg_us;   // This is ok
+
+
+    B.  Declaring pointer variable.
+        Star should be closer to a type.
+        example:
+          int* isRandomNumbers;
+
+
+    C.  Type specification.
+        Use Hungarian notation to specify type of a variable
+        (https://en.wikipedia.org/wiki/Hungarian_notation).
+        Add prefix to a variable name which corresponds to the variable type.
+
+        1. basic types.
+
+            a.  integer (int, unsigned int, long int, etc. ): prefix 'i'
+                example:
+                  iA, iX, iTree,
+
+            b.  char: preix 'c'
+                example:
+                  cChr, cA, cX
+
+            c.  float: prefix 'f'
+                example:
+                  fA, fX, fCash
+
+            d.  double: prefix 'd'
+                example:
+                  dA, dX, dCash
+
+            e.  bool: prefix 'b'
+                example:
+                  bOK, bLIGHTS_ON,
+
+            f.  string (c++ std::string): prefix 'str'
+                example:
+                  strSurname, strPassword,
+
+            g.  pointer: add 's' (as star) for every star in type definition
+                examples:
+                  int*   isA;     // Pointer to int
+                  float**  fssX;  // Pointer to float*
+
+            h.  structure: prefix 'st'
+                example:
+                  struct some_struct  stA;
+
+            i. another object:  no prefix or 'h'
+
+
+        2: purpose-oriented types.
+           Purpose-oriented types have higher priority than basic types.
+
+            a.  time: prefix 't'
+                example:
+                  tStart, tEnd,
+                Double is recommended as a time variable.
+
+            b.  the number of something: prefix 'n'
+                examples:
+                  nTrees - the number of trees
+                  nCars  - the number of cars
+                Unsigned int is recommended as 'the number of something'.
+
+            c.  integers which are used as bool: prefix 'b'
+                examples:
+                  const int OK = 1;
+                  int bFinalResult = OK;
+
+            d.  indices of objects: prefix 'inx'
+                (used f.ex in loops in iterating through objects)
+                examples:
+                  for (unsigned int inxCar=0; inxCar < 10; inxCar++)
+                  {
+                      nVehicles += isCars[inxCar];
+                  }
+                Unsigned int is recommended as 'the number of something'.
+
+
+    D. Multi-variable declarations in one line.
+       Allowed only if variables are not pointers,
+       examples:
+        int iX, iY;   // this is ok
+        int* iX, iY;  // tis is incorrect
+
+
+    E. Maximum, minimum.
+       Max and min should be used as suffixes.
+       example:
+        int nCars;      // the number of cars
+        int nCarsMax;   // maximum value of iCars
+
+
+    F. Unsigned int type, (uint vs unsigned int).
+       'unsigned int' is recommened, 'uint' should not be used in new projects.
+
+
+--------------------------------------------------------------------------------
+
+II. TYPE DEFINITIONS.
+
+    A. Names.
+       Types definitions are in UpperCamelCase.
+
+
+--------------------------------------------------------------------------------
+
+III. FUNCTIONS.
+
+    A.  Names.
+        Function names are in lower_case_names_with_underscore.
+
+    B.  Function comment headers.
+        1.  Every function should have a header with a short function
+            description, and interface description.
+            Example:
+              int some_function(int iA)
+              {
+              /*
+               *  some_function:  example of a function with a proper function
+               *                  header.
+               *
+               *  Parameters:
+               *   iA:  [int]  a number which will be increased
+               *
+               *  Return:
+               *   iAA: [int]  an input parameter + 1
+               *
+               */
+
+              int iAA;
+              iAA = iA + 1;
+              return iAA;
+              }
+
+        2.  Main function does not need to have a header.
+
+
+--------------------------------------------------------------------------------
+
+IV. COMMENTS.
+
+    A. /* vs //
+
+        1. Comments should start with //.
+
+        2. Inline comments are encouraged.
+
+        3. A set of lines of code should have a separate comment line.
+           Example:
+           // Compute roots of quadratic equation
+           dD = dB * dB - 4 * dA * dC;         // Discriminant
+           dR1 = (-dB - sqrt(dD)) / (2 * dA);  // Root 1
+           dR2 = (-dB + sqrt(dD)) / (2 * dA);  // Root2
+
+        4. Never use /* */ - it is allowed only in function headers.
+
+
+--------------------------------------------------------------------------------
+
+V. SOME GENERAL REMARKS.
+
+    A. Language.
+       If there is human language in the code, it is English.
+
+    B. Line limit.
+       Every line must not be longer than 80 columns.
+
+    C. Brackets placing.
+       Opening and closing bracket should be in the same columns.
+       examples:
+
+       // This is correct bracket placing
+       int some_function()
+       {
+
+
+       }
+
+       // This is incorrect bracket placing
+       int some_function(){
+
+
+       }
+
+    D. File names.
+       File names should be lowerCamelCase.cpp or lowerCamelCase.c
