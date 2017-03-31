@@ -1,0 +1,212 @@
+================================================================================
+
+Proposed Python coding style.
+
+Version 1.0  (25 Feb 2017)
+
+(c) Jacek Pierzchlewski, 2017  jacek@pierzchlewski.com, pierzchlewski.com
+    license: BSD-2-Clause
+
+================================================================================
+
+
+I. PEP8.
+   Follow pep8 recommendations with following exceptions:
+
+   A. E221: multiple spaces before operator
+
+   B. E711: comparison to None should be ‘if cond is None:’
+
+   C. E712: comparison to True should be ‘if cond is True:’ or ‘if cond:’
+
+   D. E713: test for membership should be ‘not in’
+
+   E. E714: test for object identity should be ‘is not’
+
+   The above list of five exceptions may be reduced, but not expanded!.
+
+
+--------------------------------------------------------------------------------
+
+II. VARIABLES.
+
+	A.  Names
+	    1. Variable names are in lowerCamelCase.
+
+	    2. Constant variables are in UPPERCASE or UPPER_CASE_WITH_UNDERSCORE,
+	       except prefix type specification (from Hungarian notation).
+	       However, constant variables are allowed not to follow
+	       Hungarian notation.
+	       example:
+	        iPI = 3.14   # This is ok
+	        PI = 3.144   # This is also ok
+	        iDISTANCE_FROM_PERTH_TO_PERTH = 14706  # This is ok
+	        DISTANCE_FROM_PERTH_TO_PERTH = 14706   # This is also ok
+
+        3. If a unit is added to a variable name, it is added after
+           an underscore.
+           example:
+             tAvg_us = 4.3  # This is ok
+
+    B.  Type specification.
+        Use Hungarian notation to specify type of a variable
+        (https://en.wikipedia.org/wiki/Hungarian_notation).
+        Add prefix to a variable name which corresponds to the variable type.
+
+        1. basic types.
+
+            a.  integer:  prefix 'i'
+                example:
+                  iA, iX, iTree,
+
+            c.  float: prefix 'i' or 'f' (recommended)
+                It is allowed to use 'i', as for integers,
+                but 'f' is recommended for new projects.
+                examples:
+                  iA = 3.14   # This is ok
+                  fA = 4.13   # This is even better
+
+            c.  string: prefix 'str'
+                example:
+                  strSurname, strPassword,
+
+            d.  dictionary: prefix 'd'
+            	example:
+            	  dEngWelsh = {}
+            	  dEngWelsh['dog'] = 'ci'
+            	  dEngWelsh['house'] = 'ty'
+            	  dEngWelsh['computer'] = 'cyfrifiadur'
+
+            e.  list: prefix 'l'
+                example:
+                  lCities = ["London", "Oslo", "Johanesburg"]
+
+            f.  tuple: prefix 't'
+                  tCities = ("London", "Oslo", "Johanesburg")
+
+            g.  Numpy array (1D): prefix 'v' ("vector")
+            	   vA = np.array([1, 2, 3])
+
+            h.  Numpy array (2D): prefix 'm' ("matrix")
+            	   mA = np.array([1, 2, 3])
+
+            i.  Numpy array (3D): prefix 'm3' (3D matrix)
+            	   m3A = np.array([1, 2, 3])
+
+            j.  Numpy array ( >= 4D)
+                Never use such arrays
+
+            k.  another object:  no prefix or 'h'
+
+
+        2: purpose-oriented types.
+           Purpose-oriented types have higher priority than basic types.
+
+            a.  time: prefix 't'
+                example:
+                  tStart, tEnd,
+
+            b.  the number of something: prefix 'n'
+                examples:
+                  nTrees = 4  # the number of trees
+                  nCars = 2   # the number of cars
+
+            c.  a number which is used as bool: prefix 'b'
+                examples:
+                  OK = 1
+                  bFinalResult = OK
+
+            d.  handle to an objects: 'h'
+                It is recommended to add 'h' if a handle to an object is
+                copied from one object to another.
+
+            e.  indices of objects: prefix 'inx'
+                (used f.ex in loops in iterating through objects)
+                examples:
+                  for inxCars in range(10):
+                      nVehicles += lCars[inxCar];
+
+
+    C. Maximum, minimum.
+       Max and min should be used as suffixes.
+       example:
+        nCars = 10      # the number of cars
+        nCarsMax = 11   # maximum value of nCars
+
+
+--------------------------------------------------------------------------------
+
+III. FUNCTIONS.
+
+    A.  Names.
+        Function names are in lower_case_names_with_underscore.
+
+    B.  Function comment headers.
+        1.  Every function should have a header with a short function
+            description, and interface description.
+            example:
+
+			  def some_function(iA):
+			      """
+                  some_function:  example of a function with a proper function
+                                  header.
+
+ 			      Arguments:
+			        iA:  [int]  a number which will be increased
+
+			      Return:
+			        iAA: [int]  an input parameter + 1
+			      """
+
+        2.  Main function (if exists) does not need to have a header.
+
+
+--------------------------------------------------------------------------------
+
+IV. CLASSES
+
+	A.  Names.
+	    Classes names are in UpperCamelCase.
+
+    B.  Public vs. private function.
+        1. A 'public' function in Python is a function which may be used from
+           outside a class.
+
+	    2. A 'private' function is a function wihch should not be used from
+	       outside a class. Its name should start with an underscore.
+
+	C.  Headers.
+	    Every class should have a header with a list of public functions
+	    with brief descriptions.
+	    example:
+
+		  class SoccerStriker():
+	    	  """
+	    	  List of functions:
+
+	          FUNCTIONS USED DURING GAME:
+
+	          - shot_on_goal()...................Shot on goal
+	          - shot_on_goal2()..................Shot on goal (bicycle kick)
+	          - pass_to_another_player().........Give ball to the closest player
+	          - pretend_fouled().................Make strange face and lay down
+	                                             on the grass
+	          - show_that_you_need_a_change()....Show to the manager that you
+			  								     are tired and need a change
+
+
+	          FUNCTIONS USED IN EVERYDAY LIFE:
+
+	          - buy_sport_car()..................Spend your salary on a flashy
+	                                             car
+	    	  """
+
+--------------------------------------------------------------------------------
+
+V. SOME GENERAL REMARKS.
+
+    A. Language.
+       If there is human language in the code, it is English.
+
+    B. File names.
+       File names should be lowerCamelCase.py
